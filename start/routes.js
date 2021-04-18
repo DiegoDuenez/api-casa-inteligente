@@ -26,18 +26,28 @@ Route.group(() =>{
   Route.get('usuarios', 'UserController.show')
   // AREA
   Route.get('areas/:id?', 'AreaController.show')
-  Route.get('areas/usuario/:id', 'AreaController.getUserArea')
+  Route.get('areas/usuario/:id', 'AreaController.showUserAreas')
+  // SENSORES
+  Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
+  Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
+  Route.post('roles', 'UserController.createRol')
+  Route.post('rol/areas', 'UserController.rolAreas')
   // USER - AREA
   Route.post('areas', 'AreaController.create')
+  // SENSORES
+  Route.post('sensor/tipo', 'SensorController.createSensoresTipos')
 }).prefix('crear').middleware('auth')
 
 
 Route.group(() =>{
+  Route.delete('rol/:id', 'UserController.deleteRoles')
   // AREA
   Route.delete('areas/:id', 'AreaController.delete')
+  // USER
+  Route.delete('usuario/:id', 'UserController.delete' )
 }).prefix('eliminar').middleware('auth')
 
 

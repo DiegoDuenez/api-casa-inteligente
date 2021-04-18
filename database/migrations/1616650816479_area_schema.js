@@ -6,7 +6,7 @@ const Schema = use('Schema')
 class AreaSchema extends Schema {
   up () {
     this.create('areas', (table) => {
-      table.string('id', 255).primary()
+      table.increments()
       table.string('nombre', 80).notNullable()
       table.timestamps()
     })

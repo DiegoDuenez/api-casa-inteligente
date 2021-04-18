@@ -9,9 +9,9 @@ class AuthController {
     async register({request, response}) {
         const input = request.all();
         const validation = await validate(request.post(), {
-          nombre: 'required|min:3|max:255',
-          email: 'required|email|unique:users,email',
-          password: 'required',
+          nombre: 'required',
+          email: 'string:allowNull|email|unique:users,email',
+          password: 'string:allowNull',
           rol_id: 'required|number'
         });
         if (validation.fails()) {

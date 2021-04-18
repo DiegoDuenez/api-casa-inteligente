@@ -8,7 +8,7 @@ class SensoresAreasSchema extends Schema {
     this.create('sensores_areas', (table) => {
       table.increments()
       table.integer('sensor_id').unsigned().references('id').inTable('sensores_registrados')
-      table.string('area_id').references('id').inTable('areas')
+      table.integer('area_id').unsigned().references('id').inTable('areas')
       table.timestamps()
     })
   }

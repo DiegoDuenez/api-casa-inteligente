@@ -3,19 +3,19 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class UsuariosAreasSchema extends Schema {
+class RolesHabitacionesSchema extends Schema {
   up () {
-    this.create('usuarios_areas', (table) => {
+    this.create('roles_habitaciones', (table) => {
       table.increments()
-      table.integer('user_id').unsigned().references('id').inTable('users')
+      table.integer('rol_id').unsigned().references('id').inTable('roles')
       table.integer('area_id').unsigned().references('id').inTable('areas')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('usuarios_areas')
+    this.drop('roles_habitaciones')
   }
 }
 
-module.exports = UsuariosAreasSchema
+module.exports = RolesHabitacionesSchema

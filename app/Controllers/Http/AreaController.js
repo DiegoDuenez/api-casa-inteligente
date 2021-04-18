@@ -9,7 +9,7 @@ const {validate} = use('Validator') //Validator
 
 class AreaController {
 
-    async show({params: {id},response}){
+    async show({params: {id},response,}){
 
         if (id == null) {
     
@@ -33,6 +33,7 @@ class AreaController {
           }
 
     }
+
 
     async create({request, response, auth}){
 
@@ -58,7 +59,12 @@ class AreaController {
   
     }
 
-    async getUserArea({params: {id},response}){
+    async showUserAreas({params: {id},response, auth}){
+     /* const user = await auth.getUser()
+      
+      if(id == user.id){
+
+      }*/
         const user_area = await Db
         .select('*')
         .from('usuarios_areas')
