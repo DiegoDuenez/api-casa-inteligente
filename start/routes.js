@@ -28,8 +28,10 @@ Route.group(() =>{
   Route.get('areas/:id?', 'AreaController.show')
   Route.get('areas/usuario/:id', 'AreaController.showUserAreas')
   // SENSORES
+  Route.get('sensores/area/:id', 'SensorController.showSensoresAreas')
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
   Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
+  Route.get('historial/sensor/:id', 'SensorController.showHistorialSensores')
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
@@ -39,6 +41,9 @@ Route.group(() =>{
   Route.post('areas', 'AreaController.create')
   // SENSORES
   Route.post('sensor/tipo', 'SensorController.createSensoresTipos')
+  Route.post('sensor/registrado', 'SensorController.createSensoresRegistrados')
+  Route.post('sensor/area', 'SensorController.createSensoresAreas')
+  Route.post('historial', 'SensorController.createHistorial' )
 }).prefix('crear').middleware('auth')
 
 

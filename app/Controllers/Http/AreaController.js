@@ -54,7 +54,7 @@ class AreaController {
   
         return response.status(200).json({
           mensaje: "Se ha creado el area",
-          area: Area
+          area: await Db.select('*').from('areas').where('nombre', '=', input.nombre)
         })
   
     }

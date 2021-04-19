@@ -69,6 +69,54 @@ class SensorController {
 
     }
 
+    async showSensoresAreas({params: {id}, request, response}){
+
+      if(id){
+        const sensores = await Db.table('sensores_areas')
+        .innerJoin('areas', 'sensores_areas.area_id', 'areas.id')
+        .innerJoin('sensores_registrados', 'sensores_areas.sensor_id', 'sensores_registrados.id')
+        .select('sensores_areas.*', "areas.nombre as area_nombre", "sensores_registrados.nombre as sensor_nombre")
+        .where('sensores_areas.area_id', '=', id)
+        return response.status(200).json({
+          sensores_area: sensores
+        })
+      }
+      else {
+      
+        return response.status(400).json({
+          mensaje: "No se encontro sensor en el area"
+        })
+  
+      }
+
+    }
+
+    async showHistorialSensores({params: {id} ,request, response}){
+
+      if(id){
+
+        const historial = await Db.table('historiales')
+        .innerJoin('sensores_registrados', 'sensores_registrados.id', 'historiales.sensor_id')
+        .select('historiales.*','sensores_registrados.nombre')
+        .where('sensores_registrados.id', '=', id)
+
+        return response.status(200).json({
+          historial: historial
+        })
+
+      }
+      else {
+      
+        return response.status(400).json({
+          mensaje: "No se encontro historial existente"
+        })
+  
+      }
+
+      
+
+    }
+
     async createSensoresTipos({request, response}){
 
       const input = request.all()
@@ -81,13 +129,94 @@ class SensorController {
       }
 
       const sensor_tipo = await Db
-        .table('usuarios_areas')
+        .table('sensores_tipos')
         .insert({nombre: input.nombre})
 
       return response.status(200).json({
         mensaje: "Se ha creado el tipo de sensor",
-        sensor: sensor_tipo
+        sensor: await Db.select('*').from('sensores_tipos').where('id','=', sensor_tipo)
       })
+
+    }
+
+    async createSensoresRegistrados({request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.post(), {
+        nombre: 'required',
+        tipo_id: 'required'
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+      const sensor_reg = await Db
+        .table('sensores_registrados')
+        .insert({nombre: input.nombre, tipo_id: input.tipo_id})
+
+      return response.status(200).json({
+        mensaje: "Se ha creado el nuevo sensor",
+        sensor: await Db.select('*').from('sensores_registrados').where('id','=', sensor_reg)
+      })
+
+    }
+
+    async createSensoresAreas({request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.post(), {
+        sensor_id: 'required',
+        area_id: 'required'
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+      const sensor_area = await Db
+        .table('sensores_areas')
+        .insert({sensor_id: input.sensor_id, area_id: input.area_id})
+
+      return response.status(200).json({
+        mensaje: "Se ha creado el nuevo sensor en la habitacion",
+        sensor: //await Db.select('*').from('sensores_areas').where('id','=', sensor_area)
+        await Db.table('sensores_areas')
+        .innerJoin('areas', 'sensores_areas.area_id', 'areas.id')
+        .innerJoin('sensores_registrados', 'sensores_areas.sensor_id', 'sensores_registrados.id')
+        .select('sensores_areas.*', "areas.nombre as area_nombre", "sensores_registrados.nombre as sensor_nombre")
+        .where('sensores_areas.id', '=', sensor_area)
+      })
+
+    }
+
+    async createHistorial({request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.post(), {
+        sensor_id: 'required',
+        distancia: 'number:allowNull',
+        pir: 'number:allowNull',
+        humedad: 'number:allowNull',
+        temperatura: 'number:allowNull'
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+      const historial = await Db
+        .table('historiales')
+        .insert({sensor_id: input.sensor_id, distancia: input.distancia, pir: input.pir, humedad: input.humedad, temperatura: input.temperatura, created_at :Db.fn.now(),
+          updated_at : Db.fn.now()})
+
+        return response.status(200).json({
+          mensaje: "Se ha generado historial",
+          historial: await Db.table('historiales')
+          .innerJoin('sensores_registrados', 'sensores_registrados.id', 'historiales.sensor_id')
+          .select('historiales.*','sensores_registrados.nombre')
+          .where('sensores_registrados.id', '=', input.sensor_id)
+        })
 
     }
 
