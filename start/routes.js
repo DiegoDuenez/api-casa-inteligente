@@ -18,15 +18,18 @@ const Route = use('Route')
 
 Route.post('registro', 'Auth/AuthController.register')
 Route.post('login', 'Auth/AuthController.login')
-Route.get('perfil', 'UserController.getUser')
+
 
 
 Route.group(() =>{
   // USER
-  Route.get('usuarios', 'UserController.show')
+  Route.get('usuarios/:id?', 'UserController.show')
+  Route.get('perfil', 'UserController.getUser')
+  Route.get('roles/:id?', 'UserController.showRoles')
   // AREA
   Route.get('areas/:id?', 'AreaController.show')
   Route.get('areas/usuario/:id', 'AreaController.showUserAreas')
+  Route.get('areas/rol/:id', 'AreaController.showRolesAreas')
   // SENSORES
   Route.get('sensores/area/:id', 'SensorController.showSensoresAreas')
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
@@ -35,6 +38,7 @@ Route.group(() =>{
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
+  // ROL
   Route.post('roles', 'UserController.createRol')
   Route.post('rol/areas', 'UserController.rolAreas')
   // USER - AREA
@@ -48,14 +52,28 @@ Route.group(() =>{
 
 
 Route.group(() =>{
+  // ROL
   Route.delete('rol/:id', 'UserController.deleteRoles')
   // AREA
   Route.delete('areas/:id', 'AreaController.delete')
+  Route.delete('rol/:id/area/:idArea', 'AreaController.deleteAreasRol')
   // USER
   Route.delete('usuario/:id', 'UserController.delete' )
+  // SENSORES
+  Route.delete('area/sensor/:id', 'SensorController.deleteSensoresArea')
+  Route.delete('sensor/registrado/:id', 'SensorController.deleteSensorRegistrado')
+  Route.delete('sensor/tipo/:id', 'SensorController.deleteSensorTipo')
 }).prefix('eliminar').middleware('auth')
 
-
+Route.group(() =>{
+  // ROL
+  Route.put('rol/:id', 'UserController.updateRol')
+  // AREA
+  Route.put('areas/:id', 'AreaController.update')
+  // SENSORES
+  Route.put('sensor/tipo/:id', 'SensorController.updateSensorTipo')
+  Route.put('sensor/registrado/:id', 'SensorController.updateSensorRegistrado')
+}).prefix('editar').middleware('auth')
 
 
 // OTRAS

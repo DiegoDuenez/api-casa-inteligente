@@ -13,14 +13,19 @@ class UserController {
     
         if (id == null) {
     
-          const usuarios = await User.all()
+          const usuarios = await Db.table('users')
+          .innerJoin('roles', 'roles.id', 'users.rol_id')
+          .select('users.*', 'roles.nombre as rol_nombre')
           return response.status(200).json({
             usuarios: usuarios
           })
     
         } else if (id) {
     
-          const usuario = await User.find(id)
+          const usuario = await Db.table('users')
+          .innerJoin('roles', 'roles.id', 'users.rol_id')
+          .select('users.*', 'roles.nombre as rol_nombre')
+          .where('id', '=', id)
           return response.status(200).json({
             usuario: usuario
           })
@@ -35,6 +40,33 @@ class UserController {
     
   }
 
+  async showRoles({params: {id}, response}){
+
+    if(id == null){
+      const roles = await Db.select('*')
+      .from('roles')
+      return response.status(200).json({
+        roles: roles
+      })
+    }
+    else if (id) {
+    
+      const rol = await Db.select('*')
+      .from('roles').where('id', '=', id)
+      return response.status(200).json({
+        rol: rol
+      })
+
+    } else {
+
+      return response.status(400).json({
+        mensaje: "No se encontro al rol"
+      })
+
+    }
+
+  }
+
   async create({request, response, auth}){
 
     const input = request.all()
@@ -42,7 +74,8 @@ class UserController {
       const validation = await validate(request.post(), {
         nombre: 'required',
         email: 'nullable',
-        password: 'nullable'
+        password: 'nullable',
+        rol_id: 'required|number'
       });
       if (validation.fails()) {
         return validation.messages()
@@ -183,6 +216,27 @@ class UserController {
       rol: rolArea
     })
     
+
+
+  }
+
+  async updateRol({params :{id}, request, response}){
+
+    const input = request.all()
+
+    const validation = await validate(request.all(), {
+      nombre: 'required|unique:roles, nombre'
+
+    });
+    if (validation.fails()) {
+      return validation.messages()
+    }
+
+      const rolUpd = await Db.table('roles').where('id', id).update('nombre', input.nombre)
+      return response.status(200).json({
+        mensaje: "Se actulizo el nombre del rol",
+        rol: rolUpd
+      })
 
 
   }

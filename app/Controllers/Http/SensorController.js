@@ -220,6 +220,91 @@ class SensorController {
 
     }
 
+    async deleteSensoresArea({params: {id}, response}){
+
+      const sensoresAreas = await Db
+      .table('sensores_areas') 
+      .where({id: id})
+      .delete()
+
+      return response.status(200).json({
+        mensaje: "Se ha borrado el sensor del area",
+        eliminado: sensoresAreas
+      })
+
+    }
+
+    async deleteSensorRegistrado({params: {id}, request, response}){
+
+      const sensorHistorial = await Db
+      .table('historiales')
+      .where("sensor_id",id)
+      .delete()
+
+      const sensoresAreas = await Db
+      .table('sensores_areas') 
+      .where("sensor_id",id)
+      .delete()
+
+      const sensoresReg = await Db
+      .table('sensores_registrados') 
+      .where("id", id)
+      .delete()
+
+      return response.status(200).json({
+        mensaje: "Se ha borrado el sensor registrado",
+        eliminado: sensoresReg
+      })
+
+    }
+
+    async updateSensorTipo({params: {id}, request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.all(), {
+        nombre: 'required'
+
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+      const sensorTipoUPD = await Db
+      .table('sensores_tipos')
+      .where('id', '=' ,id)
+      .update('nombre', input.nombre)
+
+        return response.status(200).json({
+          mensaje: "Se actualizo el nombre del tipo de sensor",
+          sensor_tipo: sensorTipoUPD
+        })
+
+    }
+
+    async updateSensorRegistrado({params: {id}, request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.all(), {
+        nombre: 'required'
+
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+        const sensorRegUpd= await Db
+        .table('sensores_registrados')
+        .where('id', id)
+        .update('nombre', input.nombre)
+        return response.status(200).json({
+          mensaje: "Se actulizo el nombre del sensor registrrado",
+          sensor_reg: sensorRegUpd
+        })
+
+    }
+
 }
 
 module.exports = SensorController
