@@ -1,6 +1,7 @@
 'use strict'
 
 const Sensor = use('App/Models/Sensor') //Modelo Sensor
+const Historial = use('App/MongoModels/Historial')
 const Area = use('App/Models/Area') //Modelo Area
 const Db = use('Database')
 const {validate} = use('Validator') //Validator
@@ -217,6 +218,44 @@ class SensorController {
           .select('historiales.*','sensores_registrados.nombre')
           .where('sensores_registrados.id', '=', input.sensor_id)
         })
+
+    }
+
+    async showHistorialMongo({response, request}){
+
+      const input = request.all()
+
+      if(input.nombreSensor){
+        const historial = await Historial.find({ sensor: input.nombreSensor })
+        return response.status(200).json({ data: historial })
+      }
+      else if(input.nombreSensor == null){
+        const historial = await Historial.find({ })
+        return response.status(200).json({ data: historial })
+      }
+      
+        /*const {id} = params
+        const product = await Producto.find(id)*/
+
+
+    
+    }
+
+    async createHistorialMongo({request, response}){
+
+      const input = request.all()
+
+      const obj = {
+        "sensor":input.sensor,
+        "distancia":input.distancia,
+        "pir":input.pir,
+        "humedad": input.humedad,
+        "temperatura": input.humedad
+      }
+
+      const historial = new Historial(obj)
+        await historial.save()
+        return response.status(200).json({ message: "se genero historial", data: historial})
 
     }
 

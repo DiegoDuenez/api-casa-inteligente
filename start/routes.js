@@ -35,6 +35,7 @@ Route.group(() =>{
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
   Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
   Route.get('historial/sensor/:id', 'SensorController.showHistorialSensores')
+  Route.get('historial/sensores', 'SensorController.showHistorialMongo')
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
@@ -48,6 +49,7 @@ Route.group(() =>{
   Route.post('sensor/registrado', 'SensorController.createSensoresRegistrados')
   Route.post('sensor/area', 'SensorController.createSensoresAreas')
   Route.post('historial', 'SensorController.createHistorial' )
+  Route.post('historial/mongo', 'SensorController.createHistorialMongo')
 }).prefix('crear').middleware('auth')
 
 
