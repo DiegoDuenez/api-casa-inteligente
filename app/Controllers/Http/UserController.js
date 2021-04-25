@@ -5,6 +5,7 @@ const User = use('App/Models/User') //Modelo User
 const Area = use('App/Models/Area') //Modelo Area
 const Token = use('App/Models/Token')
 const {validate} = use('Validator') //Validator
+const Hash = use('Hash')
 
 
 class UserController {
@@ -188,6 +189,41 @@ class UserController {
     return response.status(200).json({
       mensaje: "Rol creado",
       rol: rol
+    })
+
+  }
+
+  async updateUserAuth({params: {id}, request, response}){
+
+    const input = request.all()
+
+    const validation = await validate(request.all(), {
+      email: 'required',
+      password: 'required',
+
+    });
+    if (validation.fails()) {
+      return validation.messages()
+    }
+
+    //const pwd = await Hash.make(request.input('password'))
+    
+/*
+    const userUpd = await Db
+    .table('users')
+    .where('id', id)
+    .update('email', input.email)
+    .update('password', pwd )
+    */
+    const pwd =  await Hash.make(input.password)
+
+    await Db.table('users').where('id', id).update({'email':input.email, 'password': pwd})
+   
+
+    return response.status(200).json({
+      mensaje: "Se ha actualizado el usuario",
+      user: pwd
+    
     })
 
   }

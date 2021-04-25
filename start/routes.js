@@ -66,6 +66,8 @@ Route.group(() =>{
 }).prefix('eliminar').middleware('auth')
 
 Route.group(() =>{
+  // USER
+  Route.put('usuario/:id', 'UserController.updateUserAuth')
   // ROL
   Route.put('rol/:id', 'UserController.updateRol')
   // AREA
