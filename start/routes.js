@@ -27,7 +27,7 @@ Route.group(() =>{
   Route.get('roles/:id?', 'UserController.showRoles')
   // AREA
   Route.get('areas/:id?', 'AreaController.show')
-  Route.get('areas/usuario/:id', 'AreaController.showUserAreas')
+  Route.get('areas/usuario/:id', 'AreaController.showUserAreas')//
   Route.get('areas/rol/:id', 'AreaController.showRolesAreas')
   // SENSORES
   Route.get('sensores/area/:id', 'SensorController.showSensoresAreas')
@@ -66,7 +66,7 @@ Route.group(() =>{
   // SENSORES
   Route.delete('area/sensor/:id', 'SensorController.deleteSensoresArea')
   Route.delete('sensor/registrado/:id', 'SensorController.deleteSensorRegistrado')
-  Route.delete('sensor/tipo/:id', 'SensorController.deleteSensorTipo')
+  //Route.delete('sensor/tipo/:id', 'SensorController.deleteSensorTipo')
 }).prefix('eliminar').middleware('auth')
 
 Route.group(() =>{
