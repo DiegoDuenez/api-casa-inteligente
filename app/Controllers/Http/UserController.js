@@ -26,7 +26,7 @@ class UserController {
           const usuario = await Db.table('users')
           .innerJoin('roles', 'roles.id', 'users.rol_id')
           .select('users.*', 'roles.nombre as rol_nombre')
-          .where('id', '=', id)
+          .where('users.id', '=', id)
           return response.status(200).json({
             usuario: usuario
           })
@@ -115,7 +115,7 @@ class UserController {
   
         return response.status(200).json({
           mensaje: "La informacion del usuario se actualizo con exito",
-          usuario: user
+          
         })
   
       } 
@@ -222,7 +222,7 @@ class UserController {
 
     return response.status(200).json({
       mensaje: "Se ha actualizado el usuario",
-      user: pwd
+      
     
     })
 

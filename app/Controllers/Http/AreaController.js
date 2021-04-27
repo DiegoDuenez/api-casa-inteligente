@@ -19,7 +19,6 @@ class AreaController {
             .from('areas')*/
 
             return response.json({
-              message:"hola",
               areas: areas
             })
       

@@ -16,10 +16,9 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('registro', 'Auth/AuthController.register')
+
 Route.post('login', 'Auth/AuthController.login')
-
-
+Route.post('registro', 'Auth/AuthController.register').middleware('auth')
 
 Route.group(() =>{
   // USER
@@ -39,6 +38,8 @@ Route.group(() =>{
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
+  // USER
+  
   // ROL
   Route.post('roles', 'UserController.createRol')
   Route.post('rol/areas', 'UserController.rolAreas')
