@@ -9,6 +9,8 @@ class SensoresRegistradosSchema extends Schema {
       table.increments()
       table.string('nombre', 80).notNullable()
       table.integer('tipo_id').unsigned().references('id').inTable('sensores_tipos')
+      table.integer('pin_1').notNullable().unique()
+      table.integer('pin_2').nullable().unique()
       table.timestamps()
     })
   }
