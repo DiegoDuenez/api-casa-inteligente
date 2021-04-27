@@ -146,7 +146,9 @@ class SensorController {
 
       const validation = await validate(request.post(), {
         nombre: 'required',
-        tipo_id: 'required'
+        tipo_id: 'required',
+        pin_1: 'required|unique:sensores_registrados, pin_1',
+        pin_2: 'number:allowNull|unique:sensores_registrados, pin_2'
       });
       if (validation.fails()) {
         return validation.messages()
@@ -154,7 +156,7 @@ class SensorController {
 
       const sensor_reg = await Db
         .table('sensores_registrados')
-        .insert({nombre: input.nombre, tipo_id: input.tipo_id})
+        .insert({nombre: input.nombre, tipo_id: input.tipo_id, pin_1: input.pin_1, pin_2: input.pin_2})
 
       return response.status(200).json({
         mensaje: "Se ha creado el nuevo sensor",

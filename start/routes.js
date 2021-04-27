@@ -16,10 +16,9 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('registro', 'Auth/AuthController.register')
+
 Route.post('login', 'Auth/AuthController.login')
-
-
+Route.post('registro', 'Auth/AuthController.register').middleware('auth')
 
 Route.group(() =>{
   // USER
@@ -35,10 +34,12 @@ Route.group(() =>{
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
   Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
   Route.get('historial/sensor/:id', 'SensorController.showHistorialSensores')
-  Route.get('historial/sensores', 'SensorController.showHistorialMongo')
+  
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
+  // USER
+  
   // ROL
   Route.post('roles', 'UserController.createRol')
   Route.post('rol/areas', 'UserController.rolAreas')
@@ -49,6 +50,7 @@ Route.group(() =>{
   Route.post('sensor/registrado', 'SensorController.createSensoresRegistrados')
   Route.post('sensor/area', 'SensorController.createSensoresAreas')
   Route.post('historial', 'SensorController.createHistorial' )
+  Route.post('historial/sensores', 'SensorController.showHistorialMongo')
   Route.post('historial/mongo', 'SensorController.createHistorialMongo')
 }).prefix('crear').middleware('auth')
 
