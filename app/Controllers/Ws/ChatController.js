@@ -24,11 +24,26 @@ class ChatController {
 
     console.log(request)
 
+    return "hola"
 
+      /*if(request.nombreSensor){
+        const historial = Historial.find({ sensor: request.nombreSensor })
+        return response.status(200).json({ data: historial })
+      }
+      else if(request.nombreSensor == null){
+        const historial = Historial.find({ })
+        return response.status(200).json({ data: historial })
+      }
+      
+      this.socket.broadcastToAll("message", request)
 
+      console.log(this.socket.id)
+
+      console.log(request)*/
 
   }
 
+  
 
 }
 

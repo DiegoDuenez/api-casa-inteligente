@@ -2,6 +2,8 @@
 
 const ChatController = require("../app/Controllers/Ws/ChatController")
 
+const HistorialController = require("../app/Controllers/Ws/HistorialController")
+
 /*
 |--------------------------------------------------------------------------
 | Websocket
@@ -18,5 +20,7 @@ const ChatController = require("../app/Controllers/Ws/ChatController")
 const Ws = use('Ws')
 
 Ws.channel('prueba', 'ChatController' )
+
+Ws.channel('historial', 'HistorialController')
 
 
