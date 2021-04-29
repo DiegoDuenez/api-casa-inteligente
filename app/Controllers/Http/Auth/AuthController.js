@@ -10,8 +10,8 @@ class AuthController {
         const input = request.all();
         const validation = await validate(request.post(), {
           nombre: 'required',
-          email: 'string:allowNull|email|unique:users,email',
-          password: 'string:allowNull',
+          email: 'required|email|unique:users,email',
+          password: 'required',
           rol_id: 'required|number'
         });
         if (validation.fails()) {
