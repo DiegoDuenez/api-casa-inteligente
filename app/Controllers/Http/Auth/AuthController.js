@@ -20,7 +20,6 @@ class AuthController {
     
         await User.create(input);
     
-    
         return response.status(200).json({
           mensaje: "Se ha registrado al usuario",
           usuario: User

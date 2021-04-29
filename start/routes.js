@@ -34,6 +34,10 @@ Route.group(() =>{
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
   Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
   Route.get('historial/sensor/:id', 'SensorController.showHistorialSensores')
+
+  // NOTIFICACIONES
+  Route.get('notificaciones', 'NotificacionController.show')
+  Route.get('cantidad/notificaciones', 'NotificacionController.countNotificaciones')
   
 }).prefix('mostrar').middleware('auth')
 

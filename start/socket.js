@@ -4,6 +4,8 @@ const ChatController = require("../app/Controllers/Ws/ChatController")
 
 const PineController = require("../app/Controllers/Ws/PineController")
 
+const NotificacionController = require("../app/Controllers/Ws/NotificacionController")
+
 /*
 |--------------------------------------------------------------------------
 | Websocket
@@ -22,6 +24,8 @@ const Ws = use('Ws')
 Ws.channel('prueba', 'ChatController' )
 
 Ws.channel('pines',  'PineController')
+
+Ws.channel('notificaciones', 'NotificacionController')
 //Ws.channel('historial', 'HistorialController')
 
 
