@@ -15,7 +15,7 @@
 const Factory = use('Factory')
 
 Factory.blueprint('App/Models/Persona', (faker) => {
-     return {
+     /*return {
     //id: faker.integer(({ min: 1, max: 40 })),
     id: faker.integer(({ min: 1, max: 5368 })),
     Nombre: faker.first(),
@@ -24,5 +24,5 @@ Factory.blueprint('App/Models/Persona', (faker) => {
     Email: faker.email()
 
 
-        }
+        }*/
     })

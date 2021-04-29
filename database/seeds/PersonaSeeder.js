@@ -12,11 +12,11 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
-
+/*
 class PersonaSeeder {
   async run () {
     await Factory.model('App/Models/Persona').createMany(30)
   }
-}
+}*/
 
 module.exports = PersonaSeeder

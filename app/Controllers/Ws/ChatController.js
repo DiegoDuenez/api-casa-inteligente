@@ -24,7 +24,7 @@ class ChatController {
 
     console.log(request)
 
-    return "hola"
+    
 
       /*if(request.nombreSensor){
         const historial = Historial.find({ sensor: request.nombreSensor })

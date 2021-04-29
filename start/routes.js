@@ -18,7 +18,7 @@ const Route = use('Route')
 
 
 Route.post('login', 'Auth/AuthController.login')
-Route.post('registro', 'Auth/AuthController.register')//.middleware('auth')
+Route.post('registro', 'Auth/AuthController.register').middleware('auth')
 
 Route.group(() =>{
   // USER
@@ -38,8 +38,6 @@ Route.group(() =>{
 }).prefix('mostrar').middleware('auth')
 
 Route.group(() =>{
-  // USER
-  
   // ROL
   Route.post('roles', 'UserController.createRol')
   Route.post('rol/areas', 'UserController.rolAreas')
@@ -82,7 +80,3 @@ Route.group(() =>{
 }).prefix('editar').middleware('auth')
 
 
-// OTRAS
-Route.group(() =>{
-  Route.get('roles', 'UserController.getRoles')
-})

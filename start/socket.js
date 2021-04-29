@@ -2,7 +2,7 @@
 
 const ChatController = require("../app/Controllers/Ws/ChatController")
 
-const HistorialController = require("../app/Controllers/Ws/HistorialController")
+const PineController = require("../app/Controllers/Ws/PineController")
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,7 @@ const Ws = use('Ws')
 
 Ws.channel('prueba', 'ChatController' )
 
-Ws.channel('historial', 'HistorialController')
+Ws.channel('pines',  'PineController')
+//Ws.channel('historial', 'HistorialController')
 
 
