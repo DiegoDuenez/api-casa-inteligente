@@ -58,6 +58,8 @@ Route.group(() =>{
 
 
 Route.group(() =>{
+  // NOTIFICACION
+  Route.delete('notificacion/:nombre', 'NotificacionController.deleteNotificacion')
   // ROL
   Route.delete('rol/:id', 'UserController.deleteRoles')
   // AREA

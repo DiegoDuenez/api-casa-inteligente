@@ -17,12 +17,23 @@ class NotificacionController {
 
     async countNotificaciones({response}){
         
-        const cantidad = Notificacion.count({})
+        const cantidad = await Notificacion.count({})
 
         return response.status(200).json({
             mensaje: "Notificaciones",
             data: cantidad
         })
+    }
+
+    async deleteNotificacion({params: {nombre},response}){
+        
+        const eliminar = await Notificacion.deleteMany({ nombre_autor: nombre})
+
+        return response.status(200).json({
+            mensaje: "Se elimino la notificación",
+            data: eliminar
+        })
+    
     }
 }
 
