@@ -7,7 +7,7 @@ class SensoresTiposSchema extends Schema {
   up () {
     this.create('sensores_tipos', (table) => {
       table.increments()
-      table.string('nombre', 80).notNullable()
+      table.string('nombre', 80).notNullable().unique()
       table.timestamps()
     })
   }

@@ -13,16 +13,28 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
+const Hash = use('Hash')
 
-Factory.blueprint('App/Models/Persona', (faker) => {
-     /*return {
+Factory.blueprint('roles', async () =>{
+    return {
+        nombre: "administrador"
+    }
+}) 
+
+Factory.blueprint('sensores_tipos', async () =>{
+    return {
+        nombre: "pir"
+    }
+}) 
+
+Factory.blueprint('App/Models/User', async () => {
+     return {
     //id: faker.integer(({ min: 1, max: 40 })),
-    id: faker.integer(({ min: 1, max: 5368 })),
-    Nombre: faker.first(),
-    Apellidos: faker.last(),
-    Edad: faker.age({type: 'adult'}),
-    Email: faker.email()
+    nombre: "diegoAdmin",
+    email: "diego@admin.com",
+    password: await Hash.make("password"),
+    rol_id: 1
 
 
-        }*/
+        }
     })
