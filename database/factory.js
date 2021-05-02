@@ -32,7 +32,7 @@ Factory.blueprint('App/Models/User', async () => {
     //id: faker.integer(({ min: 1, max: 40 })),
     nombre: "diegoAdmin",
     email: "diego@admin.com",
-    password: await Hash.make("password"),
+    password: "password",
     rol_id: 1
 
 
