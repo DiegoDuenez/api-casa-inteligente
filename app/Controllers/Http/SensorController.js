@@ -252,9 +252,17 @@ class SensorController {
       
         /*const {id} = params
         const product = await Producto.find(id)*/
+    }
 
-
-    
+    async showHistorialMongoGet({params: {id}, response}){
+      if(id){
+        const historial = await Historial.find({ sensor_id: id})
+        return response.status(200).json({ data: historial })
+      }
+      else if(id == 0){
+        const historial = await Historial.find({ })
+        return response.status(200).json({ data: historial })
+      }
     }
 
     async createHistorialMongo({request, response}){

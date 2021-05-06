@@ -34,6 +34,7 @@ Route.group(() =>{
   Route.get('sensores/tipos/:id?', 'SensorController.showSensoresTipos')
   Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
   Route.get('historial/sensor/:id', 'SensorController.showHistorialSensores')
+  Route.get('historial/sensores/:id', 'SensorController.showHistorialMongoGet')
 
   // NOTIFICACIONES
   Route.get('notificaciones', 'NotificacionController.show')
