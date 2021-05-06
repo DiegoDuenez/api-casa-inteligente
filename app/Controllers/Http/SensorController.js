@@ -50,23 +50,23 @@ class SensorController {
               sensores_registrados: sensores
             })
       
-          } else if (id) {
-      
-            const sensor = await Db
-            .select('*')
-            .from('sensores_registrados')
-            .where('id', '=', id) 
-            return response.status(200).json({
-              sensor_registrado: sensor
-            })
-      
-          } else {
-      
-            return response.status(400).json({
-              mensaje: "No se encontro al tipo de sensor"
-            })
-      
-          }
+        } else if (id) {
+    
+          const sensor = await Db
+          .select('*')
+          .from('sensores_registrados')
+          .where('id', '=', id) 
+          return response.status(200).json({
+            sensor_registrado: sensor
+          })
+    
+        } else {
+    
+          return response.status(400).json({
+            mensaje: "No se encontro al tipo de sensor"
+          })
+    
+        }
 
     }
 
