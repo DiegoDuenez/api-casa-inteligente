@@ -92,6 +92,20 @@ class SensorController {
 
     }
 
+    async showLeds({params: {id}, response, request}){
+
+      if(id == null){
+        const leds = await Db.select('*').from('sensores_registrados').where('tipo_id', '=', 1)
+
+        return response.status(200).json({
+          leds: leds
+        })
+
+      }
+
+    }
+
+
     async showHistorialSensores({params: {id} ,request, response}){
 
       if(id){
@@ -342,6 +356,29 @@ class SensorController {
         return response.status(200).json({
           mensaje: "Se actulizo el nombre del sensor registrrado",
           sensor_reg: sensorRegUpd
+        })
+
+    }
+
+    async estatusLed({params: {id}, request, response}){
+
+      const input = request.all()
+
+      const validation = await validate(request.all(), {
+        estatus: 'boolean:allowNull'
+
+      });
+      if (validation.fails()) {
+        return validation.messages()
+      }
+
+      const led = await Db
+        .table('sensores_registrados')
+        .where('id', id)
+        .update('estatus', input.estatus)
+        return response.status(200).json({
+          mensaje: "Se actualizo el estatus del led",
+          led: led
         })
 
     }

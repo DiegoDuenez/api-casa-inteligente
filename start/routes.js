@@ -38,6 +38,7 @@ Route.group(() =>{
   // NOTIFICACIONES
   Route.get('notificaciones', 'NotificacionController.show')
   Route.get('cantidad/notificaciones', 'NotificacionController.countNotificaciones')
+  Route.get('leds/:id?', 'SensorController.showLeds')
   
 }).prefix('mostrar').middleware('auth')
 
@@ -84,6 +85,7 @@ Route.group(() =>{
   // SENSORES
   Route.put('sensor/tipo/:id', 'SensorController.updateSensorTipo')
   Route.put('sensor/registrado/:id', 'SensorController.updateSensorRegistrado')
+  Route.put('led/estatus/:id', 'SensorController.estatusLed')
 }).prefix('editar').middleware('auth')
 
 
