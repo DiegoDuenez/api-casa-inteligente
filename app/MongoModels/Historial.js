@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const Mixed = mongoose.Schema.Types.Mixed
  
 let historialSchema = mongoose.Schema({
-  sensor: { type: String, default: '' },
+  sensor_id: { type: Number, default: '' },
   distancia: { type: Number, default: '' },
   pir: { type: Number, default: '' },
   humedad: { type: Number, default: '' },

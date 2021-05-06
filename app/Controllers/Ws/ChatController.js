@@ -9,13 +9,11 @@ class ChatController {
 
   onMessage(request) {
     Historial.create({
-
-      sensor: request.sensor,
+      sensor_id: request.sensor_id,
       distancia: request.distancia, 
       pir: request.pir,
       humedad:request.humedad,
       temperatura: request.temperatura
-
      })
 
     this.socket.broadcastToAll("message", request)
@@ -23,8 +21,6 @@ class ChatController {
     console.log(this.socket.id)
 
     console.log(request)
-
-    
 
       /*if(request.nombreSensor){
         const historial = Historial.find({ sensor: request.nombreSensor })

@@ -227,11 +227,11 @@ class SensorController {
 
       const input = request.all()
 
-      if(input.nombreSensor){
-        const historial = await Historial.find({ sensor: input.nombreSensor })
+      if(input.sensor_id){
+        const historial = await Historial.find({ sensor_id: input.sensor_id })
         return response.status(200).json({ data: historial })
       }
-      else if(input.nombreSensor == null){
+      else if(input.sensor_id == null){
         const historial = await Historial.find({ })
         return response.status(200).json({ data: historial })
       }
@@ -248,14 +248,14 @@ class SensorController {
       const input = request.all()
 
       const obj = {
-        "sensor":input.sensor,
+        "sensor_id":input.sensor_id,
         "distancia":input.distancia,
         "pir":input.pir,
         "humedad": input.humedad,
         "temperatura": input.humedad
       }
 
-      const historial = new Historial(obj)
+        const historial = new Historial(obj)
         await historial.save()
         return response.status(200).json({ message: "se genero historial", data: historial})
 
