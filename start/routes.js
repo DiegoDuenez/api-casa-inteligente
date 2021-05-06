@@ -70,6 +70,7 @@ Route.group(() =>{
   // SENSORES
   Route.delete('area/sensor/:id', 'SensorController.deleteSensoresArea')
   Route.delete('sensor/registrado/:id', 'SensorController.deleteSensorRegistrado')
+  Route.delete('historial/sensor/:id', 'SensorController.deleteSensorHistorialMongo' )
   //Route.delete('sensor/tipo/:id', 'SensorController.deleteSensorTipo')
 }).prefix('eliminar').middleware('auth')
 

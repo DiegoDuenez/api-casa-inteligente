@@ -346,6 +346,17 @@ class SensorController {
 
     }
 
+    async deleteSensorHistorialMongo({params: {id},response}){
+
+      const eliminar = await Historial.deleteMany({ sensor_id: id})
+
+        return response.status(200).json({
+            mensaje: "Se elimino el historial",
+            data: eliminar
+        })
+
+    }
+
 }
 
 module.exports = SensorController
