@@ -10,6 +10,7 @@ let historialSchema = mongoose.Schema({
   pir: { type: Number, default: '' },
   humedad: { type: Number, default: '' },
   temperatura: { type: Number, default: '' },
+  led: { type: Number, default: '' }
 }, {
   timestamps: true
 })

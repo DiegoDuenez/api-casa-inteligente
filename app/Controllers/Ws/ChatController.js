@@ -13,7 +13,8 @@ class ChatController {
       distancia: request.distancia, 
       pir: request.pir,
       humedad:request.humedad,
-      temperatura: request.temperatura
+      temperatura: request.temperatura,
+      led: request.led
      })
 
     this.socket.broadcastToAll("message", request)
