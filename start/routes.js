@@ -19,6 +19,7 @@ const Route = use('Route')
 Route.post('login', 'Auth/AuthController.login')
 Route.post('registro', 'Auth/AuthController.register').middleware('auth')
 Route.get('sensores/registrados/:id?', 'SensorController.showSensoresRegistrados')
+Route.get('mostrar/leds/:id?', 'SensorController.showLeds')
 
 Route.group(() =>{
   // USER
@@ -39,7 +40,7 @@ Route.group(() =>{
   // NOTIFICACIONES
   Route.get('notificaciones', 'NotificacionController.show')
   Route.get('cantidad/notificaciones', 'NotificacionController.countNotificaciones')
-  Route.get('leds/:id?', 'SensorController.showLeds')
+  
   
 }).prefix('mostrar').middleware('auth')
 
