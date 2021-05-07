@@ -23,7 +23,7 @@ Factory.blueprint('roles', async () =>{
 
 Factory.blueprint('sensores_tipos', async () =>{
     return {
-        nombre: "led"    }
+        nombre: "pir"    }
 }) 
 
 Factory.blueprint('App/Models/User', async () => {
